@@ -102,3 +102,14 @@ func main() {
     // &main.person{LastName:"Doe", FirstName:""}
 }
 ```
+
+Credits
+-------
+
+The basic problem was well described in a [blog post of Will Noris](https://willnorris.com/2014/05/go-rest-apis-and-pointers?utm_content=bufferb70ff&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer). 
+
+The nice solution was brought up by Levi Cook in the comments of the post.
+
+I really think, there should be compiler support for the supported builtin types, so that the type wrappers are not necessary. 
+
+Therefor [I have created a ticket](https://code.google.com/p/go/issues/detail?can=4&start=0&num=100&q=&colspec=ID%20Status%20Stars%20Release%20Owner%20Repo%20Summary&groupby=&sort=&id=8303) that you might be interested in.
