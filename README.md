@@ -59,61 +59,46 @@ package main
 
 import (
     "database/sql"
-    "encoding/json"
     "fmt"
-    b "github.com/go-on/builtin"
+    "github.com/go-on/builtin"
     "github.com/go-on/builtin/sqlnull"
+    "github.com/lib/pq"
 )
 
 type person struct {
-    LastName   string
-    FirstName  b.Stringer  `json:",omitempty"`
-    IsFemale   b.Booler    `json:",omitempty"`
-    Age        b.Int64er   `json:",omitempty"`
-    HourlyRate b.Float64er `json:",omitempty"`
+    LastName  string
+    FirstName builtin.Stringer
 }
 
-type fakeScanner struct{}
-
-func (fakeScanner) Scan(dest ...interface{}) error {
-    for _, d := range dest {
-        switch dst := d.(type) {
-        case *sql.NullBool:
-            dst.Bool = false
-            dst.Valid = true
-        case *string:
-            *dst = "Doe"
-        }
+func query(db *sql.DB, q string) *person {
+    r := db.QueryRow(q)
+    var p = new(person)
+    err := sqlnull.Wrap(r).Scan(&p.LastName, &p.FirstName)
+    if err != nil {
+        panic(err.Error())
     }
-    return nil
+    return p
 }
 
 func main() {
-
-    var p = new(person)
-
-    // a fake scanner for testing this example, finds only
-    // LastName, FirstName and IsFemale
-    // you would use *Row or *Rows from database/sql as scanner
-    scanner := fakeScanner{}
-
-    err := sqlnull.Wrap(scanner).Scan(
-        &p.FirstName,
-        &p.LastName,
-        &p.HourlyRate,
-        &p.Age,
-        &p.IsFemale,
-    )
-
+    connectString, err := pq.ParseURL("postgres://docker:docker@172.17.0.2:5432/pgsqltest")
     if err != nil {
-        fmt.Println(err.Error())
+        panic(err.Error())
+    }
+    db, err := sql.Open("postgres", connectString)
+    if err != nil {
+        panic(err.Error())
     }
 
-    fmt.Printf("%v\n", p)
-    data, _ := json.Marshal(p)
-    fmt.Printf("%s", data)
-    // Output:
-    // &{Doe <nil> false <nil> <nil>}
-    // {"LastName":"Doe","IsFemale":false}
+    fmt.Printf("%#v\n%#v\nc%#v\n",
+        query(db, `SELECT 'Doe', 'John'`),
+        query(db, `SELECT 'Doe', null`),
+        query(db, `SELECT 'Doe', ''`),
+    )
+
+    // Output
+    // &main.person{LastName:"Doe", FirstName:"John"}
+    // &main.person{LastName:"Doe", FirstName:builtin.Stringer(nil)}
+    // &main.person{LastName:"Doe", FirstName:""}
 }
 ```
