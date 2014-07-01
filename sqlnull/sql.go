@@ -1,3 +1,7 @@
+/*
+Package sqlnull provides a wrapper around a Scanner such as *sql.Row or *sql.Rows from
+database/sql that simplifies the handling of nullable results.
+*/
 package sqlnull
 
 import (
@@ -6,6 +10,10 @@ import (
 )
 
 type Scanner interface {
+	// Scan scans values into the given destination and
+	// returns an error if some happens.
+	// It shares the same semantic as *Row.Scan and *Rows.Scan from the database/sql package which
+	// intentionally fulfill this interface.
 	Scan(dest ...interface{}) error
 }
 
@@ -13,11 +21,11 @@ type nullScanner struct {
 	Scanner
 }
 
-// Wrap wraps the given scanner (might be *sql.Row or *sql.Rows)
-// returning a new scanner that when scanning uses the Null* types from database/sql
-// to set the values of *builtin.Booler, *builtin.Stringer and friends if the
-// result was not null.
-// This allows much easier handling of nullable values when scanning sql query results
+// Wrap wraps the given scanner returning a new scanner.
+// This new scanner uses the Null* types from database/sql
+// to set the values of *builtin.Booler, *builtin.Stringer and friends, if the
+// result was not null. Otherwise the values are not modified.
+// All other values are passed through.
 func Wrap(scanner Scanner) Scanner {
 	return &nullScanner{scanner}
 }

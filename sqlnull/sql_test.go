@@ -150,8 +150,8 @@ func fakeScanner() Scanner {
 	return personScanner(3)
 }
 
-// create an element with a simple self defined tag
-func ExampleWrap() {
+// Scan into a struct will optional (nullable) values
+func Example() {
 	type person struct {
 		LastName   string
 		FirstName  builtin.Stringer  `json:",omitempty"`
@@ -179,8 +179,10 @@ func ExampleWrap() {
 		fmt.Println(err.Error())
 	}
 
+	fmt.Printf("%v\n", p)
 	data, _ := json.Marshal(p)
 
 	fmt.Printf("%s", data)
-	// Output: {"LastName":"Doe","FirstName":"Johanna","IsFemale":true}
+	// Output: &{Doe Johanna true <nil> <nil>}
+	// {"LastName":"Doe","FirstName":"Johanna","IsFemale":true}
 }

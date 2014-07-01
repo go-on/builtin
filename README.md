@@ -93,21 +93,27 @@ func main() {
     var p = new(person)
 
     // a fake scanner for testing this example, finds only
-    // LastName and IsFemale
-    // you would use *Row or *Rows from database/sql as scanner instead
+    // LastName, FirstName and IsFemale
+    // you would use *Row or *Rows from database/sql as scanner
     scanner := fakeScanner{}
 
     err := sqlnull.Wrap(scanner).Scan(
-        &p.FirstName, &p.LastName, &p.HourlyRate, &p.Age, &p.IsFemale,
+        &p.FirstName,
+        &p.LastName,
+        &p.HourlyRate,
+        &p.Age,
+        &p.IsFemale,
     )
 
     if err != nil {
         fmt.Println(err.Error())
     }
 
+    fmt.Printf("%v\n", p)
     data, _ := json.Marshal(p)
     fmt.Printf("%s", data)
-    // Output: {"LastName":"Doe","IsFemale":false}
+    // Output:
+    // &{Doe <nil> false <nil> <nil>}
+    // {"LastName":"Doe","IsFemale":false}
 }
-
 ```

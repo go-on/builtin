@@ -52,7 +52,10 @@ func main() {
 		fmt.Println(err.Error())
 	}
 
+	fmt.Printf("%v\n", p)
 	data, _ := json.Marshal(p)
 	fmt.Printf("%s", data)
-	// Output: {"LastName":"Doe","IsFemale":false}
+	// Output:
+	// &{Doe <nil> false <nil> <nil>}
+	// {"LastName":"Doe","IsFemale":false}
 }

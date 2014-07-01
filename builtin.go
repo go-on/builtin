@@ -1,3 +1,7 @@
+/*
+Package builtin provides wrappers around builtin types to make them optional and let
+them fulfill a specific interface for each supported type.
+*/
 package builtin
 
 type Stringer interface {

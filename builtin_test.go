@@ -158,9 +158,8 @@ func TestBuiltins(t *testing.T) {
 
 }
 
-// ExampleOptionalJSON shows how not set values can be destinguished from
-// zero values that are set.
-func ExampleOptionalJSON() {
+// This example shows how to distinguish values that are not set from zero values
+func Example() {
 	type repo struct {
 		Name    string
 		Desc    Stringer  `json:",omitempty"`
