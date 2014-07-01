@@ -90,7 +90,7 @@ func main() {
         panic(err.Error())
     }
 
-    fmt.Printf("%#v\n%#v\nc%#v\n",
+    fmt.Printf("%#v\n%#v\n%#v\n",
         query(db, `SELECT 'Doe', 'John'`),
         query(db, `SELECT 'Doe', null`),
         query(db, `SELECT 'Doe', ''`),
