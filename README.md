@@ -52,6 +52,7 @@ func main() {
 ```
 
 Example 2: set nullable values with database/sql
+------------------------------------------------
 
 ```go
 package main
