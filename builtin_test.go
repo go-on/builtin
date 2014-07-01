@@ -157,3 +157,31 @@ func TestBuiltins(t *testing.T) {
 	}
 
 }
+
+// ExampleOptionalJSON shows how not set values can be destinguished from
+// zero values that are set.
+func ExampleOptionalJSON() {
+	type repo struct {
+		Name    string
+		Desc    Stringer  `json:",omitempty"`
+		Private Booler    `json:",omitempty"`
+		Age     Int64er   `json:",omitempty"`
+		Price   Float64er `json:",omitempty"`
+	}
+
+	print := func(r *repo) {
+		b, _ := json.Marshal(r)
+		fmt.Printf("%s\n", b)
+	}
+
+	notSet := &repo{Name: "not-set"}
+	allSet := &repo{"allSet", String("the allset repo"), Bool(true), Int64(20), Float64(4.5)}
+	zero := &repo{"", String(""), Bool(false), Int64(0), Float64(0)}
+
+	print(allSet)
+	print(notSet)
+	print(zero)
+	// Output: {"Name":"allSet","Desc":"the allset repo","Private":true,"Age":20,"Price":4.5}
+	// {"Name":"not-set"}
+	// {"Name":"","Desc":"","Private":false,"Age":0,"Price":0}
+}
