@@ -3,9 +3,10 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"gopkg.in/go-on/builtin.v1"
-	"gopkg.in/go-on/builtin/sqlnull.v1"
+
 	"github.com/lib/pq"
+	"gopkg.in/go-on/builtin.v1"
+	"gopkg.in/go-on/builtin.v1/sqlnull"
 )
 
 type person struct {
