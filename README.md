@@ -19,7 +19,7 @@ package main
 import (
     "encoding/json"
     "fmt"
-    b "github.com/go-on/builtin"
+    b "gopkg.in/go-on/builtin.v1"
 )
 
 type repo struct {
@@ -60,8 +60,8 @@ package main
 import (
     "database/sql"
     "fmt"
-    "github.com/go-on/builtin"
-    "github.com/go-on/builtin/sqlnull"
+    "gopkg.in/go-on/builtin.v1"
+    "gopkg.in/go-on/builtin/sqlnull.v1"
     "github.com/lib/pq"
 )
 

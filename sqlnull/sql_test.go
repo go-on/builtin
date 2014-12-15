@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"github.com/go-on/builtin"
+	"gopkg.in/go-on/builtin.v1"
 	"testing"
 )
 
