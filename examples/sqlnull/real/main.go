@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/lib/pq"
+	"gopkg.in/go-on/pq.v2"
 	"gopkg.in/go-on/builtin.v1"
 	"gopkg.in/go-on/builtin.v1/sqlnull"
 )
