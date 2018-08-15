@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"fmt"
 
-	"gopkg.in/go-on/pq.v2"
-	"gopkg.in/go-on/builtin.v1"
-	"gopkg.in/go-on/builtin.v1/sqlnull"
+	"github.com/go-on/pq"
+	"github.com/go-on/builtin"
+	"github.com/go-on/builtin/sqlnull"
 )
 
 type person struct {

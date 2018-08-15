@@ -6,7 +6,7 @@ package sqlnull
 
 import (
 	"database/sql"
-	"gopkg.in/go-on/builtin.v1"
+	"github.com/go-on/builtin"
 )
 
 type Scanner interface {

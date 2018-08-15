@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	b "gopkg.in/go-on/builtin.v1"
+	b "github.com/go-on/builtin"
 )
 
 type repo struct {

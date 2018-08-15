@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	b "gopkg.in/go-on/builtin.v1"
-	"gopkg.in/go-on/builtin.v1/sqlnull"
+	b "github.com/go-on/builtin"
+	"github.com/go-on/builtin/sqlnull"
 )
 
 type person struct {
